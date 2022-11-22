@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using FluentValidation;
 using HomeApi.Contracts.Models.Devices;
 
@@ -13,15 +12,16 @@ namespace HomeApi.Contracts.Validation
         /// <summary>
         /// Метод, конструктор, устанавливающий правила
         /// </summary>
-        public EditDeviceRequestValidator() 
+        public EditDeviceRequestValidator()
         {
-            RuleFor(x => x.NewName).NotEmpty(); 
+            RuleFor(x => x.NewName).NotEmpty();
             RuleFor(x => x.NewRoom).NotEmpty().Must(BeSupported)
-                .WithMessage($"Please choose one of the following locations: {string.Join(", ", Values.ValidRooms)}");
+                .WithMessage($"Пожалуйста, выберите одно из следующих мест: " +
+                $"{string.Join(", ", Values.ValidRooms)}");
         }
-        
+
         /// <summary>
-        ///  Метод кастомной валидации для свойства location
+        /// Метод кастомной валидации для свойства location
         /// </summary>
         private bool BeSupported(string location)
         {
